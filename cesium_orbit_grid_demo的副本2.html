@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script src="https://cesiumjs.org/releases/1.57/Build/Cesium/Cesium.js"></script>
+  <link href="https://cesiumjs.org/releases/1.57/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+</head>
+<body>
+  <div id="cesiumContainer" style="width: 100%; height:100%"></div>
+  <script>
+    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJmNmQwZDBhMy03NThkLTRkZmItYjMyZi01YTA5OTgxZDE0ZDMiLCJpZCI6MTA2MDMsImlhdCI6MTYyNDUzNzcwNH0.Kj0PJzGmWjLQTNpEoxRFBj2ETH5W8V3zo5hI5HDNAUE';
+    var viewer = new Cesium.Viewer('cesiumContainer', {
+    skyBox : false,
+    skyAtmosphere: false,
+    contextOptions : {
+        webgl: {
+            alpha: true
+        }
+    }
+});
+viewer.scene.backgroundColor = new Cesium.Color(1,1,1,0.0);
+
+
+//viewer.scene.globe.atmosphereSaturationShift = -0.35;
+//viewer.scene.globe.atmosphereBrightnessShift = -0.05;
+
+var globe = viewer.scene.globe;
+globe.imageryLayers.removeAll();
+//globe.baseColor = Cesium.Color.fromCssColorString('#b6def9');
+globe.baseColor = Cesium.Color.fromCssColorString('#f7fbff');
+
+var tonerLayer = globe.imageryLayers.addImageryProvider(
+    Cesium.createOpenStreetMapImageryProvider({
+        url : 'https://stamen-tiles.a.ssl.fastly.net/toner-background/',
+        credit : 'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA.'
+    })
+);
+tonerLayer.alpha = 0.8;
+tonerLayer.brightness = 3;
+tonerLayer.contrast = 0.7;
+    
+</script>
+</body>
+</html>
